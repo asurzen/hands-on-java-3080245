@@ -4,6 +4,7 @@ import java.util.Scanner;
 import javax.security.auth.login.LoginException;
 public class Menu {
   private Scanner scanner;
+  
 
   public static void main(String[] args){
     System.out.println("Welcome to Toy Bank");
@@ -12,7 +13,7 @@ public class Menu {
     Customer customer = menu.authenticateUser();
     if (customer != null){
       Account account = DataSource.getAccount(customer.getAccountId());
-      customer.showMenu(customer, account);
+      menu.showMenu(customer,account);
     }
 
     menu.scanner.close();
@@ -33,11 +34,11 @@ public class Menu {
     }
     return customer;
   }
-
-  private void showMenu(Customer customer, Account account){
+  
+  private void showMenu(Customer customer, Account account) {
     int selection = 0;
     System.out.println("=============================================");
-    while(selection != 4 && customer.isAuthenticated()){
+    while (selection != 4 && customer.isAuthenticated()) {
       System.out.println("Please select one of the following options:");
       System.out.println("1. Deposit");
       System.out.println("2. Withdraw");
@@ -47,7 +48,7 @@ public class Menu {
       selection = scanner.nextInt();
       double amount = 0;
 
-      switch(selection){
+      switch (selection) {
         case 1:
           System.out.println("How much would you like to deposit?");
           amount = scanner.nextDouble();
