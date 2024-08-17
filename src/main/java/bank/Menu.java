@@ -2,6 +2,8 @@ package bank;
 import java.util.Scanner;
 
 import javax.security.auth.login.LoginException;
+
+import bank.exceptions.AmountException;
 public class Menu {
   private Scanner scanner;
   
@@ -52,7 +54,12 @@ public class Menu {
         case 1:
           System.out.println("How much would you like to deposit?");
           amount = scanner.nextDouble();
-          account.deposit(amount);
+          try{
+            account.deposit(amount);
+          }catch(AmountException e){
+            System.out.println(e.getMessage());
+            System.out.println("Please Try Again !!");
+          }
           break;
         case 2:
           System.out.println("How much would you like to withdraw?");
