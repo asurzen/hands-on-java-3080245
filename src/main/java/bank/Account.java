@@ -44,9 +44,23 @@ public class Account {
     else{
       double newBalance = balance + amount;
       setBalance(newBalance);
+      DataSource.updateBalance(this.id, newBalance);
     }
   }
-  public void withdraw(double amount){
+  public void withdraw(double amount) throws AmountException{
+    if(amount <0){
+      throw new AmountException("Withdraw amount must be greater than zero");
 
+    }
+    else{
+      double newBalance = balance - amount;
+      if(newBalance<1){
+        throw new AmountException("Insufficient Balnce");
+      }
+      else{
+        setBalance(newBalance);
+        DataSource.updateBalance(id, newBalance);
+      }
+    }
   }
 }
